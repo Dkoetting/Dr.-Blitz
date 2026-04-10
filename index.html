@@ -351,6 +351,10 @@
             <input type="email" id="email" name="email" placeholder="max@beispiel.de" required>
           </div>
           <div class="form-group">
+            <label for="phone">Telefon (für Rückruf)</label>
+            <input type="tel" id="phone" name="phone" placeholder="+49 170 1234567" required>
+          </div>
+          <div class="form-group">
             <label for="service">Was brauchen Sie?</label>
             <select id="service" name="service" required>
               <option value="">Bitte wählen…</option>
@@ -462,13 +466,14 @@ async function handleSubmit(event){
   const payload={
     name:form.name.value.trim(),
     email:form.email.value.trim(),
+    phone:form.phone.value.trim(),
     service:form.service.value,
     availability:form.availability.value,
     message:form.message.value.trim(),
     website:form.website.value.trim()
   };
 
-  if(!payload.name || !payload.email || !payload.service || !payload.availability || !payload.message){
+  if(!payload.name || !payload.email || !payload.phone || !payload.service || !payload.availability || !payload.message){
     error.textContent='Bitte alle Pflichtfelder ausfüllen.';
     error.style.display='block';
     return;

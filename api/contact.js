@@ -17,6 +17,7 @@ export default async function handler(req, res) {
   const {
     name,
     email,
+    phone,
     service,
     availability,
     message,
@@ -28,7 +29,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  if (!name || !email || !service || !availability || !message) {
+  if (!name || !email || !phone || !service || !availability || !message) {
     res.status(400).json({ error: "Missing required fields" });
     return;
   }
@@ -67,6 +68,7 @@ export default async function handler(req, res) {
     "",
     `Name: ${name}`,
     `E-Mail: ${email}`,
+    `Telefon: ${phone}`,
     `Service: ${service}`,
     `Terminfenster: ${availability}`,
     "",
