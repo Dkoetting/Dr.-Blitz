@@ -39,7 +39,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const from = process.env.RESEND_FROM || "Dr. Blitz <dirk@koetting.bayern>";
+  const from = process.env.RESEND_FROM || "Dr. Blitz <info@edvkonzepte.de>";
   const to = process.env.CONTACT_TO || "dirk@koetting.bayern";
   const subject = `Neue Anfrage: ${service}`;
   const text = [

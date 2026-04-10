@@ -1,2 +1,5 @@
 ﻿.playwright-cli/
 output/
+resend_apy.txt
+.env
+.env.*
