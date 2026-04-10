@@ -41,8 +41,28 @@ export default async function handler(req, res) {
 
   const from = process.env.RESEND_FROM || "Dr. Blitz <info@edvkonzepte.de>";
   const to = process.env.CONTACT_TO || "dirk@koetting.bayern";
-  const subject = `Neue Anfrage: ${service}`;
-  const text = [
+
+  const sendEmail = async ({ toList, subject, text, replyTo }) => {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: toList,
+        subject,
+        text,
+        reply_to: replyTo,
+      }),
+    });
+
+    return response;
+  };
+
+  const ownerSubject = `Neue Anfrage: ${service}`;
+  const ownerText = [
     "Neue Kontaktanfrage über dr-blitz.de",
     "",
     `Name: ${name}`,
@@ -54,24 +74,44 @@ export default async function handler(req, res) {
     message,
   ].join("\n");
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to: [to],
-      subject,
-      text,
-      reply_to: email,
-    }),
+  const ownerResponse = await sendEmail({
+    toList: [to],
+    subject: ownerSubject,
+    text: ownerText,
+    replyTo: email,
   });
 
-  if (!response.ok) {
-    const errorText = await response.text();
+  if (!ownerResponse.ok) {
+    const errorText = await ownerResponse.text();
     res.status(500).json({ error: "Email failed", detail: errorText });
+    return;
+  }
+
+  const confirmSubject = "Danke für Ihre Anfrage – Dr. Blitz";
+  const confirmText = [
+    "Vielen Dank für Ihre Anfrage.",
+    "",
+    "Ich melde mich zeitnah mit einem passenden Terminvorschlag.",
+    "",
+    `Ihr Terminfenster: ${availability}`,
+    `Ihre Anfrage: ${service}`,
+    "",
+    "Falls Sie Ergänzungen haben, antworten Sie einfach auf diese E-Mail.",
+    "",
+    "Viele Grüße",
+    "Dr. Blitz",
+  ].join("\n");
+
+  const confirmResponse = await sendEmail({
+    toList: [email],
+    subject: confirmSubject,
+    text: confirmText,
+    replyTo: to,
+  });
+
+  if (!confirmResponse.ok) {
+    // Owner mail already sent; we still return ok to the user.
+    res.status(200).json({ ok: true, warning: "confirmation_failed" });
     return;
   }
 
