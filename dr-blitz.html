@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Blitz – Elektriker mit Doktortitel</title>
+  <meta name="description" content="Dr. Blitz – promovierter Elektriker für kleine Elektroumbauten in Bayern. Steckdosen, Lichtschalter, Lampen, Kabelkanäle und mehr.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+    :root,[data-theme="light"]{
+      --text-xs:clamp(0.75rem,0.7rem + 0.25vw,0.875rem);
+      --text-sm:clamp(0.875rem,0.8rem + 0.35vw,1rem);
+      --text-base:clamp(1rem,0.95rem + 0.25vw,1.125rem);
+      --text-lg:clamp(1.125rem,1rem + 0.75vw,1.5rem);
+      --text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+      --text-2xl:clamp(2rem,1.2rem + 2.5vw,3.5rem);
+      --text-3xl:clamp(2.5rem,1rem + 4vw,5rem);
+      --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;
+      --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;
+      --space-12:3rem;--space-16:4rem;--space-20:5rem;--space-24:6rem;
+      --color-bg:#f5f4f0;--color-surface:#faf9f6;--color-surface-2:#ffffff;
+      --color-surface-offset:#eceae4;--color-divider:#dddbd5;--color-border:#d0cec8;
+      --color-text:#1a1916;--color-text-muted:#6b6a66;--color-text-faint:#b0afa9;
+      --color-text-inverse:#f5f4f0;
+      --color-primary:#f0c413;--color-primary-hover:#d9ae00;
+      --color-accent-dark:#1a1916;
+      --radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;--radius-xl:1rem;--radius-full:9999px;
+      --transition:180ms cubic-bezier(0.16,1,0.3,1);
+      --shadow-sm:0 1px 2px rgba(0,0,0,.08);--shadow-md:0 4px 12px rgba(0,0,0,.10);--shadow-lg:0 12px 32px rgba(0,0,0,.14);
+      --font-display:'Instrument Serif',Georgia,serif;
+      --font-body:'Inter','Helvetica Neue',sans-serif;
+    }
+    [data-theme="dark"]{
+      --color-bg:#111110;--color-surface:#161614;--color-surface-2:#1c1b19;
+      --color-surface-offset:#1e1d1b;--color-divider:#252422;--color-border:#302e2b;
+      --color-text:#e8e6e1;--color-text-muted:#8a8881;--color-text-faint:#56544f;
+      --color-text-inverse:#111110;--color-primary:#f0c413;--color-accent-dark:#111110;
+      --shadow-sm:0 1px 2px rgba(0,0,0,.25);--shadow-md:0 4px 12px rgba(0,0,0,.35);--shadow-lg:0 12px 32px rgba(0,0,0,.45);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:5rem}
+    body{min-height:100dvh;line-height:1.6;font-family:var(--font-body);font-size:var(--text-base);color:var(--color-text);background:var(--color-bg)}
+    img{display:block;max-width:100%;height:auto}
+    h1,h2,h3{text-wrap:balance;line-height:1.15}
+    p,li{text-wrap:pretty;max-width:72ch}
+    button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
+    a,button{transition:color var(--transition),background var(--transition),box-shadow var(--transition),transform var(--transition)}
+    :focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}
+    ::selection{background:rgba(240,196,19,.25)}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:100;background:rgba(245,244,240,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--color-divider)}
+    [data-theme="dark"] nav{background:rgba(17,17,16,.92)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) var(--space-6);max-width:1200px;margin-inline:auto}
+    .logo{display:flex;align-items:center;gap:var(--space-2);font-family:var(--font-display);font-size:var(--text-lg);color:var(--color-text);text-decoration:none}
+    .logo-bolt{width:36px;height:36px;background:var(--color-primary);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .nav-links{display:flex;gap:var(--space-8);list-style:none}
+    .nav-links a{font-size:var(--text-sm);color:var(--color-text-muted);text-decoration:none;font-weight:500}
+    .nav-links a:hover{color:var(--color-text)}
+    .nav-right{display:flex;align-items:center;gap:var(--space-4)}
+    .theme-toggle{padding:var(--space-2);color:var(--color-text-muted);border-radius:var(--radius-sm)}
+    .theme-toggle:hover{color:var(--color-text);background:var(--color-surface-offset)}
+    .btn-nav{background:var(--color-primary);color:var(--color-accent-dark);font-weight:700;font-size:var(--text-sm);padding:var(--space-2) var(--space-5);border-radius:var(--radius-full);text-decoration:none}
+    .btn-nav:hover{background:var(--color-primary-hover)}
+
+    /* HERO */
+    .hero{padding:clamp(var(--space-16),10vw,var(--space-24)) 0;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(240,196,19,.12) 0%,transparent 70%);pointer-events:none}
+    .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:center;max-width:1200px;margin-inline:auto;padding-inline:var(--space-6)}
+    .hero-badge{display:inline-flex;align-items:center;gap:var(--space-2);background:var(--color-surface-offset);border:1px solid var(--color-border);border-radius:var(--radius-full);padding:var(--space-1) var(--space-4);font-size:var(--text-xs);color:var(--color-text-muted);font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--space-6)}
+    .hero h1{font-family:var(--font-display);font-size:var(--text-3xl);font-weight:400;line-height:1.1;margin-bottom:var(--space-6)}
+    .hero h1 em{font-style:italic;color:var(--color-primary)}
+    .hero-desc{font-size:var(--text-lg);color:var(--color-text-muted);max-width:50ch;margin-bottom:var(--space-8);line-height:1.65}
+    .hero-ctas{display:flex;gap:var(--space-4);flex-wrap:wrap}
+    .btn-primary{background:var(--color-primary);color:var(--color-accent-dark);font-weight:700;font-size:var(--text-base);padding:var(--space-4) var(--space-8);border-radius:var(--radius-full);text-decoration:none;display:inline-block}
+    .btn-primary:hover{background:var(--color-primary-hover);transform:translateY(-1px);box-shadow:var(--shadow-md)}
+    .btn-secondary{background:transparent;color:var(--color-text);font-weight:500;font-size:var(--text-base);padding:var(--space-4) var(--space-8);border-radius:var(--radius-full);text-decoration:none;display:inline-block;border:1px solid var(--color-border)}
+    .btn-secondary:hover{background:var(--color-surface-offset)}
+    .hero-img-wrap{border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:4/3;background:var(--color-surface-offset)}
+    .hero-img-wrap img{width:100%;height:100%;object-fit:cover}
+
+    /* TRUST BAR */
+    .trust-bar{background:var(--color-surface);border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);padding:var(--space-6) 0}
+    .trust-bar-inner{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-6) var(--space-10);max-width:1200px;margin-inline:auto;padding-inline:var(--space-6)}
+    .trust-item{display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-sm);color:var(--color-text-muted);font-weight:500}
+    .trust-item svg{color:var(--color-primary);flex-shrink:0}
+
+    /* SECTIONS */
+    section{padding:clamp(var(--space-12),8vw,var(--space-24)) 0}
+    .container{max-width:960px;margin-inline:auto;padding-inline:var(--space-6)}
+    .container-wide{max-width:1200px;margin-inline:auto;padding-inline:var(--space-6)}
+    .section-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--color-primary);font-weight:600;margin-bottom:var(--space-3)}
+    .section-title{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:400;line-height:1.15;margin-bottom:var(--space-4)}
+    .section-title em{font-style:italic}
+    .section-desc{font-size:var(--text-base);color:var(--color-text-muted);max-width:55ch}
+
+    /* SERVICES */
+    .services-bg{background:var(--color-surface)}
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:var(--space-4);margin-top:var(--space-10)}
+    .service-card{background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-6);transition:box-shadow var(--transition),transform var(--transition)}
+    .service-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+    .service-icon{width:40px;height:40px;margin-bottom:var(--space-4);color:var(--color-primary)}
+    .service-card h3{font-size:var(--text-base);font-weight:600;margin-bottom:var(--space-2)}
+    .service-card p{font-size:var(--text-sm);color:var(--color-text-muted);max-width:100%}
+
+    /* ABOUT */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:center}
+    .about-img{border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:3/4;box-shadow:var(--shadow-lg);background:var(--color-surface-offset)}
+    .about-img img{width:100%;height:100%;object-fit:cover}
+    .about-credentials{margin-top:var(--space-8);display:flex;flex-direction:column;gap:var(--space-3)}
+    .credential{display:flex;align-items:flex-start;gap:var(--space-3);padding:var(--space-4);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)}
+    .cred-dot{width:8px;height:8px;border-radius:50%;background:var(--color-primary);flex-shrink:0;margin-top:5px}
+    .cred-text{font-size:var(--text-sm);color:var(--color-text-muted)}
+    .cred-text strong{color:var(--color-text);display:block}
+
+    /* TOOLS */
+    .tools-bg{background:var(--color-surface)}
+    .tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3);margin-top:var(--space-10)}
+    .tool-img{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;background:var(--color-surface-offset);box-shadow:var(--shadow-sm);transition:box-shadow var(--transition),transform var(--transition)}
+    .tool-img:hover{box-shadow:var(--shadow-md);transform:scale(1.02)}
+    .tool-img img{width:100%;height:100%;object-fit:cover}
+    .tool-img.large{grid-column:span 2;aspect-ratio:16/9}
+
+    /* CONTACT */
+    .contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:start;margin-top:var(--space-10)}
+    .contact-form{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-8);box-shadow:var(--shadow-sm)}
+    .form-group{margin-bottom:var(--space-5)}
+    .form-group label{display:block;font-size:var(--text-sm);font-weight:500;margin-bottom:var(--space-2)}
+    .form-group input,.form-group textarea,.form-group select{width:100%;padding:var(--space-3) var(--space-4);background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-base);color:var(--color-text)}
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--color-primary);outline:none;box-shadow:0 0 0 3px rgba(240,196,19,.18)}
+    .form-group textarea{resize:vertical;min-height:120px}
+    .btn-submit{width:100%;background:var(--color-primary);color:var(--color-accent-dark);font-weight:700;font-size:var(--text-base);padding:var(--space-4);border-radius:var(--radius-full);border:none;cursor:pointer}
+    .btn-submit:hover{background:var(--color-primary-hover)}
+    .contact-info h3{font-family:var(--font-display);font-size:var(--text-xl);font-weight:400;margin-bottom:var(--space-6)}
+    .contact-detail{display:flex;gap:var(--space-3);margin-bottom:var(--space-5);align-items:flex-start}
+    .contact-detail svg{color:var(--color-primary);flex-shrink:0;margin-top:2px}
+    .contact-detail-text{font-size:var(--text-sm)}
+    .contact-detail-text strong{display:block;font-weight:600}
+    .contact-detail-text span{color:var(--color-text-muted)}
+    .quote-box{margin-top:var(--space-8);padding:var(--space-6);background:var(--color-surface);border-radius:var(--radius-lg);border:1px solid var(--color-border)}
+
+    /* FOOTER */
+    footer{background:var(--color-accent-dark);color:var(--color-text-inverse);padding:var(--space-10) 0}
+    .footer-inner{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--space-4);max-width:1200px;margin-inline:auto;padding-inline:var(--space-6)}
+    .footer-logo{display:flex;align-items:center;gap:var(--space-2);font-family:var(--font-display);font-size:var(--text-base)}
+    .footer-note{font-size:var(--text-xs);opacity:.5}
+    .footer-links{display:flex;gap:var(--space-6)}
+    .footer-links a{font-size:var(--text-xs);opacity:.5;color:inherit;text-decoration:none}
+    .footer-links a:hover{opacity:1}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .hero-inner{grid-template-columns:1fr;gap:var(--space-10)}
+      .about-grid{grid-template-columns:1fr}
+      .contact-inner{grid-template-columns:1fr}
+      .tools-grid{grid-template-columns:1fr 1fr}
+      .tool-img.large{grid-column:span 2}
+      .nav-links{display:none}
+    }
+    @media(max-width:480px){
+      .tools-grid{grid-template-columns:1fr}
+      .tool-img.large{grid-column:span 1}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-bolt">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M13 2L4.5 13.5H11L10 22L20.5 10H14L13 2Z" fill="#1a1916" stroke="#1a1916" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      Dr. Blitz
+    </a>
+    <ul class="nav-links">
+      <li><a href="#leistungen">Leistungen</a></li>
+      <li><a href="#ueber-mich">Über mich</a></li>
+      <li><a href="#werkzeug">Werkzeug</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" data-theme-toggle aria-label="Dunkelmodus">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="#kontakt" class="btn-nav">⚡ Anfrage stellen</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">⚡ Promoviert &amp; Gelernt</div>
+      <h1>Dr. Blitz –<br><em>Elektrik mit</em><br>Doktortitel.</h1>
+      <p class="hero-desc">Kleine Elektroumbauten von einem, der es wirklich kann: promovierter Wirtschaftswissenschaftler mit Elektriker-Lehre. Steckdosen, Lichtschalter, Lampen, Kabelkanäle – sauber, sicher, schnell.</p>
+      <div class="hero-ctas">
+        <a href="#kontakt" class="btn-primary">⚡ Jetzt anfragen</a>
+        <a href="#leistungen" class="btn-secondary">Leistungen ansehen</a>
+      </div>
+    </div>
+    <div>
+      <div class="hero-img-wrap">
+        <img src="https://picsum.photos/seed/electrictools920/920/690" alt="Professionelles Elektriker-Werkzeug" width="460" height="345" loading="eager">
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Elektriker-Lehre abgeschlossen
+    </div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Dr. rer. pol. – Wirtschaftswiss.
+    </div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      VDE-konforme Ausführung
+    </div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7.05 11.5 7.35 11.76a1 1 0 0 0 1.3 0C12.95 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg>
+      Miesbach &amp; Umgebung, Bayern
+    </div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      Wiha Profi-Werkzeug
+    </div>
+  </div>
+</div>
+
+<section id="leistungen" class="services-bg">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Leistungen</div>
+      <h2 class="section-title">Was ich <em>für Sie mache</em></h2>
+      <p class="section-desc">Kleine bis mittlere Elektroarbeiten rund ums Haus – für Privatkunden in Miesbach und Umgebung.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><circle cx="12" cy="10" r="2.5"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h3>Steckdosen &amp; Schalter</h3>
+        <p>Ein- und Mehrfach-Steckdosen, USB-Steckdosen, Lichtschalter, Dimmer – fachgerecht eingebaut.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+        <h3>Lampen &amp; Leuchten</h3>
+        <p>Deckenleuchten, Wandleuchten, Außenleuchten, LED-Streifen – Montage und Anschluss.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div>
+        <h3>Kabelkanäle</h3>
+        <p>Ordentliche Kabelführung in Aufputz-Kabelkanälen, sauber und optisch ansprechend verlegt.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <h3>Sicherungsprüfung</h3>
+        <p>Spannungsmessung, Schaltkreise prüfen, Fehler suchen – mit Profi-Multimeter PEAKMETER PM18C &amp; BBC Metrawatt M2032.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+        <h3>Kleininstallationen</h3>
+        <p>Klingelanlage, Thermostate, Smart-Home-Nachrüstung, Bewegungsmelder.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <h3>Bohren &amp; Montage</h3>
+        <p>DEWALT 18V XR Brushless + Hilti TE16 – Dübel setzen, Halterungen montieren, auch in Beton und schwierigem Untergrund.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ueber-mich">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img reveal">
+        <img src="https://picsum.photos/seed/craftsman-professional/600/800" alt="Professioneller Elektriker mit Doktortitel" width="600" height="800" loading="lazy">
+      </div>
+      <div class="reveal">
+        <div class="section-label">Über Dr. Blitz</div>
+        <h2 class="section-title">Zwei Welten,<br><em>eine Person.</em></h2>
+        <p style="color:var(--color-text-muted);margin-bottom:var(--space-4)">Ich bin Dr. Blitz – promovierter Wirtschaftswissenschaftler und gelernter Elektriker. Was sich wie ein Widerspruch anhört, ist die perfekte Kombination: handwerkliches Können mit dem Anspruch an Präzision und Qualität.</p>
+        <p style="color:var(--color-text-muted)">Ich arbeite ausschließlich mit professionellem Wiha-VDE-Werkzeug, kalibrierten Multimetern und DEWALT-Akku-Maschinen. Jede Arbeit führe ich so aus, wie ich sie bei mir selbst haben möchte – korrekt, sauber, dauerhaft.</p>
+        <div class="about-credentials">
+          <div class="credential"><div class="cred-dot"></div><div class="cred-text"><strong>Elektriker-Ausbildung</strong>Abgeschlossene Lehre – solides Handwerk</div></div>
+          <div class="credential"><div class="cred-dot"></div><div class="cred-text"><strong>Dr. rer. pol.</strong>Promotion in Wirtschaftswissenschaften</div></div>
+          <div class="credential"><div class="cred-dot"></div><div class="cred-text"><strong>IT-Sicherheit &amp; Infrastruktur</strong>Jahrelange technische Projekterfahrung</div></div>
+          <div class="credential"><div class="cred-dot"></div><div class="cred-text"><strong>Bergwacht Bayern</strong>Einsatzerfahrung – verlässlich &amp; belastbar</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="werkzeug" class="tools-bg">
+  <div class="container-wide">
+    <div class="reveal">
+      <div class="section-label">Werkzeug</div>
+      <h2 class="section-title">Professionelle <em>Ausrüstung</em></h2>
+      <p class="section-desc">Wiha VDE-isoliertes Profi-Werkzeug, DEWALT 18V Akku-Maschinen, PEAKMETER PM18C True RMS, BBC Metrawatt M2032, Engelbert Strauss VDE-Zangen – kein Baumarkt-Sortiment.</p>
+    </div>
+    <div class="tools-grid reveal">
+      <div class="tool-img large">
+        <img src="https://picsum.photos/seed/wiha-toolbag/900/506" alt="Wiha VDE Werkzeugkoffer" width="900" height="506" loading="lazy">
+      </div>
+      <div class="tool-img">
+        <img src="https://picsum.photos/seed/dewalt18v/450/338" alt="DEWALT 18V XR Brushless" width="450" height="338" loading="lazy">
+      </div>
+      <div class="tool-img">
+        <img src="https://picsum.photos/seed/multimeter-digital/450/338" alt="PEAKMETER PM18C Multimeter" width="450" height="338" loading="lazy">
+      </div>
+      <div class="tool-img">
+        <img src="https://picsum.photos/seed/pliers-vde/450/338" alt="Engelbert Strauss VDE-Zangen" width="450" height="338" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Kontakt</div>
+      <h2 class="section-title">Projekt anfragen</h2>
+      <p class="section-desc">Kurz beschreiben, was zu tun ist – ich melde mich zeitnah zurück.</p>
+    </div>
+    <div class="contact-inner">
+      <div class="contact-form reveal">
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Max Mustermann" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" placeholder="max@beispiel.de" required>
+          </div>
+          <div class="form-group">
+            <label for="service">Was brauchen Sie?</label>
+            <select id="service">
+              <option value="">Bitte wählen…</option>
+              <option>Steckdose / Schalter</option>
+              <option>Lampe / Leuchte</option>
+              <option>Kabelkanal</option>
+              <option>Sicherungsprüfung</option>
+              <option>Bohrarbeiten / Montage</option>
+              <option>Sonstiges</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Kurze Beschreibung</label>
+            <textarea id="message" placeholder="Was ist zu tun? Wo in Bayern? Wann ungefähr?"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">⚡ Anfrage absenden</button>
+        </form>
+        <div id="formSuccess" style="display:none;text-align:center;padding:var(--space-12)">
+          <div style="font-size:3rem;margin-bottom:var(--space-4)">⚡</div>
+          <strong style="font-size:var(--text-lg)">Danke für Ihre Anfrage!</strong>
+          <p style="color:var(--color-text-muted);margin-top:var(--space-2)">Ich melde mich so schnell wie möglich bei Ihnen.</p>
+        </div>
+      </div>
+      <div class="contact-info reveal">
+        <h3>Direkt in Kontakt</h3>
+        <div class="contact-detail">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7.05 11.5 7.35 11.76a1 1 0 0 0 1.3 0C12.95 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg>
+          <div class="contact-detail-text"><strong>Einsatzgebiet</strong><span>Miesbach, Landkreis Miesbach &amp; Umgebung<br>Oberbayern / Bayern</span></div>
+        </div>
+        <div class="contact-detail">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.56 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.7a16 16 0 0 0 6.29 6.29l.9-.9a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div class="contact-detail-text"><strong>Telefon / WhatsApp</strong><span>Auf Anfrage über das Formular</span></div>
+        </div>
+        <div class="contact-detail">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div class="contact-detail-text"><strong>E-Mail</strong><span>info@dr-blitz.de</span></div>
+        </div>
+        <div class="quote-box">
+          <div style="font-family:var(--font-display);font-size:var(--text-xl);margin-bottom:var(--space-2)">„Sauber. Sicher. <em>Dr. Blitz.</em>"</div>
+          <div style="font-size:var(--text-sm);color:var(--color-text-muted)">Kein Murks. Kein Pfusch. Solide Elektroarbeit von jemandem, der sein Handwerk gelernt hat – und danach noch promoviert wurde.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="logo-bolt" style="width:28px;height:28px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5H11L10 22L20.5 10H14L13 2Z" fill="#1a1916" stroke="#1a1916" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      Dr. Blitz
+    </div>
+    <span class="footer-note">© 2026 Dr. Blitz · Miesbach, Bayern</span>
+    <div class="footer-links">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;
+  let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  r.setAttribute('data-theme',d);
+  if(t)t.addEventListener('click',()=>{
+    d=d==='dark'?'light':'dark';
+    r.setAttribute('data-theme',d);
+    t.innerHTML=d==='dark'
+      ?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      :'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  });
+})();
+
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+function handleSubmit(e){
+  e.preventDefault();
+  document.getElementById('contactForm').style.display='none';
+  document.getElementById('formSuccess').style.display='block';
+}
+</script>
+</body>
+</html>
